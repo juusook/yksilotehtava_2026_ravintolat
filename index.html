@@ -10,6 +10,45 @@
 </head>
 
 <body>
+
+  <header>
+  <nav>
+    <div class="logo">Ravintolat</div>
+    <button id="login-btn" type="button">Kirjaudu / Rekisteröidy</button>
+  </nav>
+</header>
+
+<section id="palvelut">
+  <h2>Palvelumme</h2>
+  <div class="card-container">
+
+    <div class="card">
+      <img src="images/hy_ravintola.jpg" alt="Ravintola" class="card-img">
+      <div class="card-content">
+        <h3>Opiskelijaruokailu</h3>
+        <p>Kelan tukeman aterian saat voimassa olevalla opiskelijakortilla.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="images/unicafe2.png" alt="Ravintola" class="card-img">
+      <div class="card-content">
+        <h3>Lounas</h3>
+        <p>Löydä maittavaa lounasta arkipäiväisin ja viikonloppuisin.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="images/stuents.jpg" alt="Opiskelijoita syömässä" class="card-img">
+      <div class="card-content">
+        <h3>Lähin ravintola</h3>
+        <p>Löydä lähin opiskelijaravintola helposti ja vaivattomasti.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
   <h1>Opiskelijaravintolat</h1>
   <h2>Suodata ravintoloita</h2>
   <div id="napit">
@@ -21,18 +60,18 @@
   <table>
     <thead
       <tr>
-        <th>Nimi</th>
-        <th>Osoite</th>
+        <th>NIMI</th>
+        <th>OSOITE</th>
       </tr>
     </thead>
     <tbody id="restaurant-list">
-      <!-- add restaurants here -->
+      <!-- restaurants here -->
     </tbody>
   </table>
 
   <!-- modal -->
   <dialog>
-    <!-- add restaurant info here when restaurant is clicked -->
+    <!-- restaurant info here  when restaurant is clicked -->
   </dialog>
 </body>
 

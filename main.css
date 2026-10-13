@@ -1,3 +1,7 @@
+*{
+  box-sizing: border-box;
+}
+
 body {
   background-color: #f0f0f0;
   font-family: sans-serif;
@@ -6,6 +10,109 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+header {
+  width: 100%;
+  background-color: lightblue;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#login-btn {
+  background-color: white;
+  color: #007bff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#login-btn:hover {
+  background-color: #f2f4f6;
+}
+
+#palvelut {
+  width: 90%;
+  max-width: 800px;
+  margin: 1.5rem auto 2rem auto;
+  text-align: center;
+}
+
+#palvelut h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+/* Korttien säiliö */
+.card-container {
+  display: flex;
+  gap: 1.5rem;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.card-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.card {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.14);
+}
+
+.card-content {
+  padding: 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.card-content h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #967241;
+  font-weight: bold;
+}
+
+.card-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #333333;
+  line-height: 1.4;
 }
 
 h1, h2 {
@@ -25,10 +132,14 @@ table {
   margin: 0;
   padding: 0;
   background-color: white;
+  width: 90%;
+  max-width: 800px;
 }
 
 thead th{
-  background-color: lightgray;
+  background-color: lightblue;
+  font-size: 1.1rem;
+/*   color: white; */
 }
 
 tbody tr {
@@ -55,18 +166,38 @@ td {
 
 .highlight {
   font-weight: bold;
-  background-color: rgb(194, 194, 235);
+  /* background-color: lightgray; */
 }
 
 dialog {
   position: relative;
   padding: 1.5rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 3px solid lightblue;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  max-height: 50%;
+  overflow-y: auto;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
 
 dialog::backdrop {
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(12px);
+}
+
+dialog h3 {
+  margin-top: 0;
+  margin-bottom: 0.7rem;
+  color: #333;
+}
+
+dialog p {
+  margin: 0.5rem 0;
+  color: #555;
+  font-size: 0.9rem;
 }
 
 .close-btn {
@@ -83,6 +214,24 @@ dialog::backdrop {
 
 .close-btn:hover {
   color: #000;
+}
+
+.menu-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tab-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-weight: bold;
 }
 
 .badge {
@@ -110,6 +259,11 @@ dialog::backdrop {
 }
 
 /* Lähin ravintola */
-tbody tr:first-child {
-
+.badge.nearest {
+  background-color: #967241;
+  color: white;
+  padding: 0.2em 0.6em;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
