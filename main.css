@@ -8,15 +8,36 @@ body {
   align-items: center;
 }
 
+h1, h2 {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+#napit {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
   margin: 0;
   padding: 0;
+  background-color: white;
 }
 
 thead th{
   background-color: lightgray;
+}
+
+tbody tr {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+tbody tr:hover {
+  background-color: #e0e0e0;
 }
 
 th {
@@ -44,6 +65,10 @@ dialog {
   border-radius: 8px;
 }
 
+dialog::backdrop {
+    backdrop-filter: blur(5px);
+}
+
 .close-btn {
   position: absolute;
   top: 8px;
@@ -60,7 +85,6 @@ dialog {
   color: #000;
 }
 
-/* Pilleri */
 .badge {
   display: inline-block;
   padding: 0.2em 0.6em;
@@ -83,4 +107,9 @@ dialog {
   background-color: #e8f5e9;
   color: #1b5e20;
   border: 1px solid #c8e6c9;
+}
+
+/* Lähin ravintola */
+tbody tr:first-child {
+
 }
