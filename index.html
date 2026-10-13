@@ -10,20 +10,26 @@
 </head>
 
 <body>
-  <h1>Restaurants</h1>
-  <h2>Filter restaurants</h2>
+  <h1>Opiskelijaravintolat</h1>
+  <h2>Suodata ravintoloita</h2>
   <div id="napit">
     <button id="sodexo">Sodexo</button>
     <button id="compass">Compass Group</button>
     <button id="reset">Show all</button>
   </div>
+
   <table>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-    </tr>
-    <!-- add restaurants here -->
+    <thead
+      <tr>
+        <th>Nimi</th>
+        <th>Osoite</th>
+      </tr>
+    </thead>
+    <tbody id="restaurant-list">
+      <!-- add restaurants here -->
+    </tbody>
   </table>
+
   <!-- modal -->
   <dialog>
     <!-- add restaurant info here when restaurant is clicked -->

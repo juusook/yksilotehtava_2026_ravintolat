@@ -3,20 +3,22 @@
 const restaurantRow = (restaurant) => {
     const { name, address, company } = restaurant;
     const tr = document.createElement('tr');
+    const companyClass = company.toLowerCase().includes('sodexo') ? 'sodexo' : 'compass';
     const nameCell = document.createElement('td');
-    nameCell.innerText = name;
+    nameCell.innerHTML = `
+    ${name}
+    <span class="badge ${companyClass}">${company}</span>`;
     const addressCell = document.createElement('td');
     addressCell.innerText = address;
-    const companyCell = document.createElement('td');
-    companyCell.innerText = company;
     tr.appendChild(nameCell);
     tr.appendChild(addressCell);
-    tr.appendChild(companyCell);
     return tr;
 };
 const restaurantModal = (restaurant, menu) => {
     const { name, address, city, postalCode, phone, company } = restaurant;
-    let html = `<h3>${name}</h3>
+    let html = `
+    <button class="close-btn" type="button">&times;</button>
+    <h3>${name}</h3>
     <p>${company}</p>
     <p>${address} ${postalCode} ${city}</p>
     <p>${phone}</p>
@@ -42,6 +44,7 @@ const restaurantModal = (restaurant, menu) => {
 };
 const errorModal = (message) => {
     const html = `
+        <button class="close-btn" type="button">&times;</button>
         <h3>Error</h3>
         <p>${message}</p>
         `;
@@ -68,19 +71,22 @@ const modal = document.querySelector('dialog');
 if (!modal) {
     throw new Error('Modal not found');
 }
-modal.addEventListener('click', () => {
-    modal.close();
+modal.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target.classList.contains('close-btn')) {
+        modal.close();
+    }
 });
 const calculateDistance = (x1, y1, x2, y2) => Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 const createTable = (restaurants) => {
-    const table = document.querySelector('table');
-    if (!table) {
-        throw new Error('Table not found');
+    const tbody = document.querySelector('tbody');
+    if (!tbody) {
+        throw new Error('Table body not found');
     }
-    table.innerHTML = '';
+    tbody.innerHTML = '';
     restaurants.forEach((restaurant) => {
         const tr = restaurantRow(restaurant);
-        table.appendChild(tr);
+        tbody.appendChild(tr);
         tr.addEventListener('click', async () => {
             try {
                 // remove all highlights

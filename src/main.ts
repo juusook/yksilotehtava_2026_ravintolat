@@ -9,22 +9,28 @@ if (!modal) {
   throw new Error('Modal not found');
 }
 
-modal.addEventListener('click', () => {
-  modal.close();
+modal.addEventListener('click', (event) => {
+
+  const target = event.target as HTMLElement;
+  if (target.classList.contains('close-btn')) {
+    modal.close();
+  }
 });
 
 const calculateDistance = (x1: number, y1: number, x2: number, y2: number) =>
   Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 
 const createTable = (restaurants: Restaurant[]) => {
-  const table = document.querySelector('table');
-  if (!table) {
-    throw new Error('Table not found');
+  const tbody = document.querySelector('tbody');
+  if (!tbody) {
+    throw new Error('Table body not found');
   }
-  table.innerHTML = '';
+
+  tbody.innerHTML = '';
+
   restaurants.forEach((restaurant) => {
     const tr = restaurantRow(restaurant);
-    table.appendChild(tr);
+    tbody.appendChild(tr);
     tr.addEventListener('click', async () => {
       try {
         // remove all highlights

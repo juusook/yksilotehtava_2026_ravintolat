@@ -4,21 +4,28 @@ import {Restaurant} from './types/Restaurant';
 const restaurantRow = (restaurant: Restaurant) => {
   const {name, address, company} = restaurant;
   const tr = document.createElement('tr');
+
+  const companyClass = company.toLowerCase().includes('sodexo') ? 'sodexo' : 'compass';
+
   const nameCell = document.createElement('td');
-  nameCell.innerText = name;
+  nameCell.innerHTML = `
+    ${name}
+    <span class="badge ${companyClass}">${company}</span>`;
+
+
   const addressCell = document.createElement('td');
   addressCell.innerText = address;
-  const companyCell = document.createElement('td');
-  companyCell.innerText = company;
+
   tr.appendChild(nameCell);
   tr.appendChild(addressCell);
-  tr.appendChild(companyCell);
   return tr;
 };
 
 const restaurantModal = (restaurant: Restaurant, menu: Menu) => {
   const {name, address, city, postalCode, phone, company} = restaurant;
-  let html = `<h3>${name}</h3>
+  let html = `
+    <button class="close-btn" type="button">&times;</button>
+    <h3>${name}</h3>
     <p>${company}</p>
     <p>${address} ${postalCode} ${city}</p>
     <p>${phone}</p>
@@ -45,6 +52,7 @@ const restaurantModal = (restaurant: Restaurant, menu: Menu) => {
 
 const errorModal = (message: string) => {
   const html = `
+        <button class="close-btn" type="button">&times;</button>
         <h3>Error</h3>
         <p>${message}</p>
         `;

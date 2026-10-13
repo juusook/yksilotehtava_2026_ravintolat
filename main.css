@@ -3,6 +3,9 @@ body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 table {
@@ -12,10 +15,14 @@ table {
   padding: 0;
 }
 
+thead th{
+  background-color: lightgray;
+}
+
 th {
   background-color: #f0f0f0;
   border-bottom: 1px solid #ccc;
-  font-weight: normal;
+  font-weight: bold;
   padding: 0.5em 1em;
   text-align: left;
 }
@@ -28,4 +35,52 @@ td {
 .highlight {
   font-weight: bold;
   background-color: rgb(194, 194, 235);
+}
+
+dialog {
+  position: relative;
+  padding: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #555;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+/* Pilleri */
+.badge {
+  display: inline-block;
+  padding: 0.2em 0.6em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 12px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* Sodexon*/
+.badge.sodexo {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  border: 1px solid #bbdefb;
+}
+
+/* Compass */
+.badge.compass {
+  background-color: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #c8e6c9;
 }
