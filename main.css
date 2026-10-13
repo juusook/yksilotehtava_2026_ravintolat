@@ -2,9 +2,20 @@
   box-sizing: border-box;
 }
 
+ :root {
+    --ivory: #EBEFEE;
+    --beige: #CCB499;
+    --clay: #C8906D;
+    --tile-orange: #BB6C43;
+    --cyan: #4F90A1;
+    --shade: #4A413C;
+
+    --border-radius-medium: 16px;
+ }
+
 body {
-  background-color: #f0f0f0;
-  font-family: sans-serif;
+  background-color: var(--ivory);
+  font-family: helvetica, sans-serif;
   margin: 0;
   padding: 0;
   display: flex;
@@ -14,7 +25,7 @@ body {
 
 header {
   width: 100%;
-  background-color: lightblue;
+  background-color: var(--cyan);
   color: white;
   padding: 1rem;
   display: flex;
@@ -36,9 +47,45 @@ nav .logo {
   font-weight: bold;
 }
 
+#hero-section{
+  width: 100%;
+  min-height: 300px;
+  background-color: #1a252f;
+  background-image: linear-gradient(135deg, rgba(26, 37, 47, 0.85)), url('/images/hero2.webp');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+#hero-section h1 {
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+hero-section .hero-content {
+  text-align: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: var(--border-radius-medium);
+  width: 90%;
+  max-width: 800px;
+}
+
+#info {
+  width: 90%;
+  max-width: 800px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
 #login-btn {
   background-color: white;
-  color: #007bff;
+  color: var(--shade);
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
@@ -47,7 +94,7 @@ nav .logo {
 }
 
 #login-btn:hover {
-  background-color: #f2f4f6;
+  background-color: var(--ivory);
 }
 
 #palvelut {
@@ -61,7 +108,7 @@ nav .logo {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
-  color: #1a1a1a;
+  color: var(--shade);
 }
 
 /* Korttien säiliö */
@@ -80,7 +127,7 @@ nav .logo {
 
 .card {
   flex: 1;
-  background-color: #ffffff;
+  background-color: white;
   border-radius: 4px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
@@ -104,7 +151,7 @@ nav .logo {
 .card-content h3 {
   margin: 0;
   font-size: 1.25rem;
-  color: #967241;
+  color: var(--clay);
   font-weight: bold;
 }
 
@@ -118,6 +165,7 @@ nav .logo {
 h1, h2 {
   text-align: center;
   margin-top: 0.5rem;
+  color: var(--shade);
 }
 
 #napit {
@@ -137,9 +185,9 @@ table {
 }
 
 thead th{
-  background-color: lightblue;
+  background-color: var(--tile-orange);
   font-size: 1.1rem;
-/*   color: white; */
+  color: white;
 }
 
 tbody tr {
@@ -148,11 +196,11 @@ tbody tr {
 }
 
 tbody tr:hover {
-  background-color: #e0e0e0;
+  background-color: var(--ivory);
 }
 
 th {
-  background-color: #f0f0f0;
+  background-color: var(--ivory);
   border-bottom: 1px solid #ccc;
   font-weight: bold;
   padding: 0.5em 1em;
@@ -160,24 +208,26 @@ th {
 }
 
 td {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--ivory);
   padding: 0.5em 1em;
 }
 
 .highlight {
-  font-weight: bold;
+/*   font-weight: bold; */
   /* background-color: lightgray; */
+  color: var(--tile-orange);
 }
 
 dialog {
   position: relative;
   padding: 1.5rem;
-  border: 3px solid lightblue;
+  border: 3px solid var(--beige);
   border-radius: 18px;
   width: 100%;
   max-width: 600px;
-  height: auto;
-  max-height: 50%;
+  height: 85vh;
+  min-height: 50vh;
+  max-height: 90vh;
   overflow-y: auto;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -185,19 +235,34 @@ dialog {
 }
 
 dialog::backdrop {
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
 }
 
 dialog h3 {
   margin-top: 0;
   margin-bottom: 0.7rem;
-  color: #333;
+  color: var(--shade);
 }
 
 dialog p {
   margin: 0.5rem 0;
-  color: #555;
+  color: var(--shade);
   font-size: 0.9rem;
+}
+
+
+button {
+  background-color: var(--cyan);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: var(--shade);
 }
 
 .close-btn {
@@ -209,11 +274,11 @@ dialog p {
   font-size: 1.5rem;
   font-weight: bold;
   cursor: pointer;
-  color: #555;
+  color: var(--shade);
 }
 
 .close-btn:hover {
-  color: #000;
+  color: var(--ivory);
 }
 
 .menu-tabs {
@@ -226,9 +291,9 @@ dialog p {
 
 .tab-button {
   padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--shade);
   border-radius: 4px;
-  background-color: #f0f0f0;
+  background-color: white;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
   font-weight: bold;
@@ -247,20 +312,20 @@ dialog p {
 /* Sodexon*/
 .badge.sodexo {
   background-color: #e3f2fd;
-  color: #0d47a1;
+  color: var(--shade);
   border: 1px solid #bbdefb;
 }
 
 /* Compass */
 .badge.compass {
   background-color: #e8f5e9;
-  color: #1b5e20;
+  color: var(--shade);
   border: 1px solid #c8e6c9;
 }
 
 /* Lähin ravintola */
 .badge.nearest {
-  background-color: #967241;
+  background-color: var(--tile-orange);
   color: white;
   padding: 0.2em 0.6em;
   border-radius: 12px;
