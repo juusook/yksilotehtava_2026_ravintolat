@@ -4,70 +4,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Safkaa</title>
   <link href="main.css" rel="stylesheet">
   <script src="build/main.js" type="module" defer></script>
 </head>
 
 <body>
-  <header>
-  <nav>
-    <div class="logo">Opiskelijaravintolat</div>
-    <button id="login-btn" type="button">Kirjaudu / Rekisteröidy</button>
-  </nav>
-</header>
-
-<section id="hero-section">
-  <div class="hero-content">
-    <h1>Opiskelijaravintolat</h1>
-<!--     <p>Halpaa safkaa jo vuodesta 1979.</p> -->
-  </div>
-</section>
-
-<section id="info">
-  <h2>Tietoa opiskelijaravintoloista</h2>
-  <p>Tervetuloa Opiskelijaravintoloiden verkkosivustolle! Täältä löydät tietoa opiskelijaravintoloista, niiden sijainneista ja palveluista. Tutustu ravintoloihin ja löydä lähin opiskelijaravintola helposti.
-  Korkeakouluopiskelijoille on myönnetty Suomessa ateriatukea jo vuodesta 1979 lähtien eli jo yli 40 vuoden ajan!
-  </p>
-</section>
-
-<section id="palvelut">
-  <h2>Palvelumme</h2>
-  <div class="card-container">
-
-    <div class="card">
-      <img src="images/hy_ravintola.jpg" alt="Ravintola" class="card-img">
-      <div class="card-content">
-        <h3>Opiskelijaruokailu</h3>
-        <p>Kelan tukeman aterian saat voimassa olevalla opiskelijakortilla.</p>
+  <div class="top-wrapper">
+    <header id="header">
+    <nav>
+      <div class="logo">
+        <a href="#">Safkaa</a>
       </div>
-    </div>
+      <a href="#ravintolat">Ravintolat</a>
+      <button id="login-btn" type="button">Kirjaudu / Rekisteröidy</button>
+    </nav>
+  </header>
 
-    <div class="card">
-      <img src="images/unicafe2.png" alt="Ravintola" class="card-img">
-      <div class="card-content">
-        <h3>Lounas</h3>
-        <p>Löydä maittavaa lounasta arkipäiväisin ja viikonloppuisin.</p>
+  <section id="hero-section">
+    <div class="hero-content">
+      <h1>Opiskelijaravintolat</h1>
+  <!--     <p>Halpaa safkaa jo vuodesta 1979.</p> -->
+    </div>
+  </section>
+
+  <section id="info">
+    <h2>Tietoa opiskelijaravintoloista</h2>
+    <p>Tervetuloa Opiskelijaravintoloiden verkkosivustolle! Täältä löydät tietoa opiskelijaravintoloista, niiden sijainneista ja palveluista. Tutustu ravintoloihin ja löydä lähin opiskelijaravintola helposti.
+    Korkeakouluopiskelijoille on myönnetty Suomessa ateriatukea jo vuodesta 1979 lähtien eli jo yli 40 vuoden ajan!
+    </p>
+  </section>
+
+  <section id="palvelut">
+    <div class="container">
+    <h2>Palvelumme</h2>
+    <div class="card-container">
+
+      <div class="card">
+        <img src="images/hy_ravintola.jpg" alt="Ravintola" class="card-img">
+        <div class="card-content">
+          <h3>Opiskelijaruokailu</h3>
+          <p>Kelan tukeman aterian saat voimassa olevalla opiskelijakortilla.</p>
+        </div>
       </div>
-    </div>
 
-    <div class="card">
-      <img src="images/stuents.jpg" alt="Opiskelijoita syömässä" class="card-img">
-      <div class="card-content">
-        <h3>Lähin ravintola</h3>
-        <p>Löydä lähin opiskelijaravintola helposti ja vaivattomasti.</p>
+      <div class="card">
+        <img src="images/unicafe2.png" alt="Ravintola" class="card-img">
+        <div class="card-content">
+          <h3>Lounas</h3>
+          <p>Löydä maittavaa lounasta arkipäiväisin ja viikonloppuisin.</p>
+        </div>
       </div>
+
+      <div class="card">
+        <img src="images/stuents.jpg" alt="Opiskelijoita syömässä" class="card-img">
+        <div class="card-content">
+          <h3>Lähin ravintola</h3>
+          <p>Löydä lähin opiskelijaravintola helposti ja vaivattomasti.</p>
+        </div>
+      </div>
+
     </div>
+    </div>
+  </section>
 
-  </div>
-</section>
+    <section id="ravintolat">
+    <h2>Ravintolat</h2>
+    <p>Ravintolat ovat järjestetty etäisyyden mukaan.</p>
+    <p class="diets">(G) Gluteeniton, (L) Laktoositon, (VL) Vähälaktoosinen, (M) Maidoton, (Veg) Soveltuu vegaaniruokavalioon, (VS) Sis. tuoretta valkosipulia, (A) Sis. Allergeeneja</p>
+    <h3>Suodata ravintoloita</h3>
+    </section>
 
-  <h1>Ravintolat</h1>
-  <h2>Suodata ravintoloita</h2>
-  <div id="napit">
-    <button id="sodexo">Sodexo</button>
-    <button id="compass">Compass Group</button>
-    <button id="reset">Näytä kaikki</button>
+    <div id="napit">
+      <button id="sodexo">Sodexo</button>
+      <button id="compass">Compass Group</button>
+      <button id="reset">Näytä kaikki</button>
+    </div>
   </div>
 
   <table>

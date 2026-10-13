@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
  :root {
     --ivory: #EBEFEE;
     --beige: #CCB499;
@@ -10,7 +14,8 @@
     --cyan: #4F90A1;
     --shade: #4A413C;
 
-    --border-radius-medium: 16px;
+    --border-radius-medium: 12px;
+    --border-radius-large: 18px;
  }
 
 body {
@@ -23,7 +28,14 @@ body {
   align-items: center;
 }
 
+.top-wrapper {
+  width: 100%;
+}
+
 header {
+  position: sticky;
+  top: 0;
+  z-index: 500;
   width: 100%;
   background-color: var(--cyan);
   color: white;
@@ -43,7 +55,15 @@ nav {
 }
 
 nav .logo {
+  font-family: Roboto, sans-serif;
   font-size: 1.5rem;
+  font-weight: bold;
+  font-style: italic;
+}
+
+a {
+  color: white;
+  text-decoration: none;
   font-weight: bold;
 }
 
@@ -51,7 +71,7 @@ nav .logo {
   width: 100%;
   min-height: 300px;
   background-color: #1a252f;
-  background-image: linear-gradient(135deg, rgba(26, 37, 47, 0.85)), url('/images/hero2.webp');
+  background-image: linear-gradient(135deg, rgba(26, 37, 47, 0.75)), url('/images/hero2.webp');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -79,13 +99,13 @@ hero-section .hero-content {
 #info {
   width: 90%;
   max-width: 800px;
-  margin: 2rem auto;
+  margin: 4rem auto;
   text-align: center;
 }
 
 #login-btn {
-  background-color: white;
-  color: var(--shade);
+  background-color: var(--tile-orange);
+  color: white;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
@@ -95,12 +115,20 @@ hero-section .hero-content {
 
 #login-btn:hover {
   background-color: var(--ivory);
+  color: var(--shade);
 }
 
 #palvelut {
+  width: 100%;
+  background-color: rgba(227, 217, 191, 0.3);
+  padding: 4rem 0;
+  margin-bottom: 2rem;
+}
+
+#palvelut .container {
   width: 90%;
   max-width: 800px;
-  margin: 1.5rem auto 2rem auto;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -170,8 +198,27 @@ h1, h2 {
 
 #napit {
   display: flex;
+  justify-content: center;
   gap: 10px;
   margin-bottom: 1.5rem;
+}
+
+#ravintolat {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#ravintolat p.diets {
+  margin: 0.5rem 0;
+  color: var(--shade);
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-bottom: 4rem;
 }
 
 table {
@@ -185,7 +232,7 @@ table {
 }
 
 thead th{
-  background-color: var(--tile-orange);
+  background-color: var(--cyan);
   font-size: 1.1rem;
   color: white;
 }
@@ -219,10 +266,10 @@ td {
 }
 
 dialog {
-  position: relative;
+  position: fixed;
   padding: 1.5rem;
   border: 3px solid var(--beige);
-  border-radius: 18px;
+  border-radius: var(--border-radius-large);
   width: 100%;
   max-width: 600px;
   height: 85vh;
@@ -252,13 +299,14 @@ dialog p {
 
 
 button {
-  background-color: var(--cyan);
+  background-color: var(--tile-orange);
   color: white;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  transition: background-color 0.2s ease-in;
 }
 
 button:hover {
@@ -304,7 +352,7 @@ button:hover {
   padding: 0.2em 0.6em;
   font-size: 0.75rem;
   font-weight: 600;
-  border-radius: 12px;
+  border-radius: var(--border-radius-medium);
   margin-left: 8px;
   vertical-align: middle;
 }
@@ -325,10 +373,10 @@ button:hover {
 
 /* Lähin ravintola */
 .badge.nearest {
-  background-color: var(--tile-orange);
+  background-color: var(--clay);
   color: white;
   padding: 0.2em 0.6em;
-  border-radius: 12px;
+  border-radius: var(--border-radius-medium);
   font-size: 0.8rem;
   font-weight: bold;
 }
