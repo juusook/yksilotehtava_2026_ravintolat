@@ -114,8 +114,8 @@ hero-section .hero-content {
 }
 
 #login-btn:hover {
-  background-color: var(--ivory);
-  color: var(--shade);
+  background-color: var(--shade);
+  color: white;
 }
 
 #palvelut {
