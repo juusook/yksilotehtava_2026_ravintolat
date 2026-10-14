@@ -11,6 +11,8 @@ html {
     --beige: #CCB499;
     --clay: #C8906D;
     --tile-orange: #BB6C43;
+    --orange: #B84E27;
+    --light-tile-orange: #E3CFC1;
     --cyan: #4F90A1;
     --lightcyan: #EBF4F6;
     --shade: #4A413C;
@@ -109,7 +111,7 @@ hero-section .hero-content {
 }
 
 #login-btn {
-  background-color: var(--tile-orange);
+  background-color: var(--orange);
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -119,7 +121,7 @@ hero-section .hero-content {
 }
 
 #login-btn:hover {
-  background-color: var(--shade);
+  background-color: var(--tile-orange);
   color: white;
 }
 
@@ -167,7 +169,7 @@ hero-section .hero-content {
   display: flex;
   flex-direction: column;
   text-align: left;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: box-shadow 0.25s ease;
 }
 
 .card:hover {
@@ -315,11 +317,12 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.2s ease-in;
+  transition: background-color 0.2s ease-in, transform 0.2s ease-in;
 }
 
 button:hover {
-  background-color: var(--shade);
+  background-color: var(--orange);
+  transform: translateY(-1px);
 }
 
 .close-btn {

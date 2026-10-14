@@ -1,6 +1,6 @@
 'use strict';
 
-// 1. Ravintolarivi taulukkoon
+// Ravintolarivi taulukkoon
 const restaurantRow = (restaurant, isNearest = false) => {
     const { name, address, company } = restaurant;
     const tr = document.createElement('tr');
@@ -19,7 +19,7 @@ const restaurantRow = (restaurant, isNearest = false) => {
     tr.appendChild(addressCell);
     return tr;
 };
-// 2. Päivän ruokalistan HTML-taulukko
+// Päivän ruokalistan HTML-taulukko
 const dailyMenuTable = (courses) => {
     if (!courses || courses.length === 0) {
         return '<p>Ei ruokalistaa saatavilla tälle päivälle.</p>';
@@ -27,9 +27,9 @@ const dailyMenuTable = (courses) => {
     let html = `
     <table>
       <tr>
-        <th>Course</th>
-        <th>Diet</th>
-        <th>Price</th>
+        <th>Ruokalaji</th>
+        <th>Ruokavalio</th>
+        <th>Hinta</th>
       </tr>
   `;
     courses.forEach((course) => {
@@ -45,7 +45,7 @@ const dailyMenuTable = (courses) => {
     html += '</table>';
     return html;
 };
-// 3. Viikon ruokalistan HTML (käy läpi jokaisen päivän)
+// Viikon ruokalistan HTML (käy läpi jokaisen päivän)
 const weeklyMenuTable = (days) => {
     if (!days || days.length === 0) {
         return '<p>Ei viikon ruokalistaa saatavilla.</p>';
@@ -58,7 +58,6 @@ const weeklyMenuTable = (days) => {
     });
     return html;
 };
-// 4. Modaalin pohjarakenne
 const restaurantModal = (restaurant, menuHtml, activeTab = 'daily') => {
     const { name, address, city, postalCode, phone, company } = restaurant;
     const html = `
@@ -79,7 +78,7 @@ const restaurantModal = (restaurant, menuHtml, activeTab = 'daily') => {
   `;
     return html;
 };
-// 5. Virhemodaali
+// Virhemodaali
 const errorModal = (message) => {
     const html = `
     <button class="close-btn" type="button">&times;</button>

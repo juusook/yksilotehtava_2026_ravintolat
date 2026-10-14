@@ -1,6 +1,6 @@
 import {Restaurant} from './types/Restaurant';
 
-// 1. Ravintolarivi taulukkoon
+// Ravintolarivi taulukkoon
 const restaurantRow = (restaurant: Restaurant, isNearest: boolean = false) => {
   const {name, address, company} = restaurant;
   const tr = document.createElement('tr');
@@ -25,7 +25,7 @@ const restaurantRow = (restaurant: Restaurant, isNearest: boolean = false) => {
   return tr;
 };
 
-// 2. Päivän ruokalistan HTML-taulukko
+// Päivän ruokalistan HTML-taulukko
 const dailyMenuTable = (courses?: any[]) => {
   if (!courses || courses.length === 0) {
     return '<p>Ei ruokalistaa saatavilla tälle päivälle.</p>';
@@ -34,9 +34,9 @@ const dailyMenuTable = (courses?: any[]) => {
   let html = `
     <table>
       <tr>
-        <th>Course</th>
-        <th>Diet</th>
-        <th>Price</th>
+        <th>Ruokalaji</th>
+        <th>Ruokavalio</th>
+        <th>Hinta</th>
       </tr>
   `;
 
@@ -55,7 +55,7 @@ const dailyMenuTable = (courses?: any[]) => {
   return html;
 };
 
-// 3. Viikon ruokalistan HTML (käy läpi jokaisen päivän)
+// Viikon ruokalistan HTML (käy läpi jokaisen päivän)
 const weeklyMenuTable = (days?: any[]) => {
   if (!days || days.length === 0) {
     return '<p>Ei viikon ruokalistaa saatavilla.</p>';
@@ -72,7 +72,7 @@ const weeklyMenuTable = (days?: any[]) => {
   return html;
 };
 
-// 4. Modaalin pohjarakenne
+
 const restaurantModal = (
   restaurant: Restaurant,
   menuHtml: string,
@@ -100,7 +100,7 @@ const restaurantModal = (
   return html;
 };
 
-// 5. Virhemodaali
+// Virhemodaali
 const errorModal = (message: string) => {
   const html = `
     <button class="close-btn" type="button">&times;</button>
