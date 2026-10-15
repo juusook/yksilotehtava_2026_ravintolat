@@ -80,12 +80,32 @@ const restaurantModal = (
 ) => {
   const {name, address, city, postalCode, phone, company} = restaurant;
 
+  const mapQuery = encodeURIComponent(`${address}, ${postalCode} ${city}`);
+
   const html = `
     <button class="close-btn" type="button">&times;</button>
-    <h3>${name}</h3>
-    <p>${company}</p>
-    <p>${address} ${postalCode} ${city}</p>
-    <p>${phone}</p>
+
+    <div class="modal-info-container">
+
+    <div class="modal-info">
+      <h3>${name}</h3>
+      <p>${company}</p>
+      <p>${address} ${postalCode} ${city}</p>
+      <p>${phone}</p>
+    </div>
+
+    <div class="map-container">
+        <iframe
+          title="Ravintolan sijainti kartalla"
+          width="100%"
+          height="200"
+          style="border:0;"
+          loading="lazy"
+          src="https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed">
+        </iframe>
+
+      </div>
+    </div>
 
     <div class="menu-tabs">
       <button id="tab-daily" class="tab-btn ${activeTab === 'daily' ? 'active' : ''}">Päivän lista</button>
