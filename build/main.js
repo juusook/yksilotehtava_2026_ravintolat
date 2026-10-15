@@ -11,7 +11,7 @@ const restaurantRow = (restaurant, isNearest = false) => {
     }
     const nameCell = document.createElement('td');
     nameCell.innerHTML = `
-    ${name} ${nearestBadge}
+    <span class='restaurant-name'>${name}</span> ${nearestBadge}
     <span class="badge ${companyClass}">${company}</span>`;
     const addressCell = document.createElement('td');
     addressCell.innerText = address;
