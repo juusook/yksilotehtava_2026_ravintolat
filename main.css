@@ -16,6 +16,7 @@ html {
     --cyan: #4F90A1;
     --lightcyan: #EBF4F6;
     --shade: #4A413C;
+    --light-yellow: rgba(227, 217, 191, 0.3);
 
     --border-radius-medium: 12px;
     --border-radius-large: 18px;
@@ -128,7 +129,7 @@ hero-section .hero-content {
 
 #palvelut {
   width: 100%;
-  background-color: rgba(227, 217, 191, 0.3);
+  background-color: var(--light-yellow);
   padding: 4rem 0;
   margin-bottom: 2rem;
 }
@@ -233,16 +234,19 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
   margin: 0;
+  margin-bottom: 2rem;
   padding: 0;
   background-color: white;
   width: 90%;
   max-width: 800px;
+  border: 3px solid var(--cyan);
+  box-shadow: -4px 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 thead th{
   position: sticky;
   padding: 0.9rem;
-  top: 0;
+  top: -2px;
   z-index: 10;
   background-color: var(--cyan);
   font-size: 1.1rem;
@@ -254,8 +258,16 @@ tbody tr {
   transition: background-color 0.3s;
 }
 
-tbody tr:hover {
+tbody tr:nth-of-type(even) {
   background-color: var(--lightcyan);
+}
+
+tbody tr:last-of-type {
+  border-bottom: 2px solid var(--cyan);
+}
+
+tbody tr:hover {
+background-color: var(--light-yellow);
 }
 
 tbody tr:hover .restaurant-name{
@@ -301,6 +313,7 @@ dialog table {
   width: 100%;
   max-width: 100%;
   margin-top: var(--margin-medium);
+  border: none;
 /*   border: var(--cyan) 1px solid; */
 
 }
@@ -309,8 +322,12 @@ dialog tbody tr {
   cursor: default;
 }
 
-dialog tbody tr:hover {
-  background-color: white;
+dialog tbody tr:nth-of-type(even) {
+  background-color: var(--lightcyan);
+}
+
+dialog tbody tr:last-of-type {
+  border-bottom: none;
 }
 
 dialog::backdrop {
@@ -391,7 +408,7 @@ button:hover {
   padding: 0.2em 0.6em;
   font-size: 0.75rem;
   font-weight: 600;
-  border-radius: var(--border-radius-medium);
+  border-radius: var(--border-radius-large);
   margin-left: 8px;
   vertical-align: middle;
 }
@@ -431,25 +448,26 @@ button:hover {
   align-items: flex-start;
   justify-content: space-between;
   margin: 3rem 0 3rem 0;
-  background-color: var(--lightcyan);
+  background-color: white;
   border-radius: var(--border-radius-large);
   padding: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: 2px solid var(--light-tile-orange);
+  background-color: var(--cyan);
 }
 
 .modal-info-container h3 {
-  color: white;
-  font-size: 1.5rem;
-  margin: 0.5rem 0;
-  background-color: var(--cyan);
+  color: var(--shade);
+  font-size: 1.3rem;
+/*   margin: 0.5rem 0; */
   border-radius: var(--border-radius-large);
-  text-align: center;
-  padding: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+/*   text-align: center; */
+/*   padding: 0.5rem; */
+/*   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); */
 }
 
 .modal-info-container p {
-  padding: 0.3rem 0;
+  padding: 0.1rem 0;
   font-size: 1.05rem;
   color: var(--shade);
 }
@@ -457,10 +475,17 @@ button:hover {
 .modal-info {
   flex: 1;
   min-width: 180px;
+  align-self: stretch;
+  background-color: white;
+  border-radius: var(--border-radius-large);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .map-container {
-  flex: 0 0 450px;
+  flex: 0 0 420px;
   height: 250px;
   border-radius: var(--border-radius, 12px);
   overflow: hidden;
@@ -478,6 +503,16 @@ button:hover {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.menu-tabs {
+  display: inline-flex;
+  background-color: var(--ivory);
+  padding: 0.5rem;
+  border-radius: var(--border-radius-medium);
+  gap: 0.5rem;
+  margin-bottom: 1rem auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -499,3 +534,4 @@ button:hover {
     height: 180px;
   }
 }
+
