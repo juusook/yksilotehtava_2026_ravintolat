@@ -179,7 +179,7 @@ modal.addEventListener('click', async (event) => {
   //Suosikin lisääminen
   if (target.id === 'add-favorite-btn') {
     if (!currentUser) {
-      alert('Kirjaudu sisään tallentaaksesi suosikkiravintolan!');
+      modal.innerHTML = authorizationModal('login');
       return;
     }
 

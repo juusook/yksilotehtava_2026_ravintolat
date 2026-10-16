@@ -381,6 +381,21 @@ button:hover {
   color: var(--ivory);
 }
 
+#add-favorite-btn {
+  background-color: var(--clay);
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius-large);
+  font-size: 0.75rem;
+  transition: background-color 0.2s ease-in, transform 0.2s ease-in;
+}
+
+#add-favorite-btn:hover {
+  background-color: var(--orange);
+  transform: translateY(-1px);
+}
+
 .menu-tabs {
   display: flex;
   justify-content: center;
