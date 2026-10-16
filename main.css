@@ -129,7 +129,8 @@ hero-section .hero-content {
 
 #palvelut {
   width: 100%;
-  background-color: var(--light-yellow);
+  background: linear-gradient(to bottom, var(--light-yellow), var(--ivory));
+/*   background-color: var(--light-yellow); */
   padding: 4rem 0;
   margin-bottom: 2rem;
 }
@@ -318,6 +319,12 @@ dialog table {
 
 }
 
+dialog th {
+  background-color: var(--cyan);
+  color: white;
+  padding: 0.5rem;
+}
+
 dialog tbody tr {
   cursor: default;
 }
@@ -448,17 +455,16 @@ button:hover {
   align-items: flex-start;
   justify-content: space-between;
   margin: 3rem 0 3rem 0;
-  background-color: white;
   border-radius: var(--border-radius-large);
   padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: 2px solid var(--light-tile-orange);
   background-color: var(--cyan);
 }
 
 .modal-info-container h3 {
-  color: var(--shade);
-  font-size: 1.3rem;
+  color: var(--ivory);
+  font-size: 1.25rem;
 /*   margin: 0.5rem 0; */
   border-radius: var(--border-radius-large);
 /*   text-align: center; */
@@ -469,19 +475,19 @@ button:hover {
 .modal-info-container p {
   padding: 0.1rem 0;
   font-size: 1.05rem;
-  color: var(--shade);
+  color: var(--ivory);
 }
 
 .modal-info {
   flex: 1;
   min-width: 180px;
   align-self: stretch;
-  background-color: white;
   border-radius: var(--border-radius-large);
   padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+
 }
 
 .map-container {

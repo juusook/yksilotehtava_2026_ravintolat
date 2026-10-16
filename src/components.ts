@@ -130,10 +130,66 @@ const errorModal = (message: string) => {
   return html;
 };
 
+// Kirjautumis- ja rekisteröitymismodaali
+const authorizationModal = (type: 'login' | 'register' = 'login') => {
+  return `
+    <button class="close-btn">&times;</button>
+    <div class="auth-container">
+      <div class="menu-tabs">
+        <button id="auth-tab-login" class="tab-button ${type === 'login' ? 'active' : ''}">Kirjaudu</button>
+        <button id="auth-tab-register" class="tab-button ${type === 'register' ? 'active' : ''}">Rekisteröidy</button>
+      </div>
+
+      <div id="auth-form-container">
+        ${type === 'login' ? loginFormHtml() : registerFormHtml()}
+      </div>
+    </div>
+  `;
+};
+
+const loginFormHtml = () => `
+  <form id="login-form" class="auth-form">
+    <h3>Kirjaudu sisään</h3>
+    <div class="form-group">
+      <label for="username">Käyttäjätunnus</label>
+      <input type="text" id="username" name="username" required autocomplete="username" />
+    </div>
+    <div class="form-group">
+      <label for="password">Salasana</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password" />
+    </div>
+    <p id="auth-error" class="error-text"></p>
+    <button type="submit" class="submit-btn">Kirjaudu</button>
+  </form>
+`;
+
+const registerFormHtml = () => `
+  <form id="register-form" class="auth-form">
+    <h3>Luo uusi tili</h3>
+    <div class="form-group">
+      <label for="reg-username">Käyttäjätunnus</label>
+      <input type="text" id="reg-username" name="username" required autocomplete="username" />
+    </div>
+    <div class="form-group">
+      <label for="reg-email">Sähköposti</label>
+      <input type="email" id="reg-email" name="email" required autocomplete="email" />
+    </div>
+    <div class="form-group">
+      <label for="reg-password">Salasana</label>
+      <input type="password" id="reg-password" name="password" required autocomplete="new-password" />
+    </div>
+    <p id="auth-error" class="error-text"></p>
+    <button type="submit" class="submit-btn">Rekisteröidy</button>
+  </form>
+`;
+
 export {
   restaurantRow,
   restaurantModal,
   errorModal,
   dailyMenuTable,
   weeklyMenuTable,
+  authorizationModal,
+  loginFormHtml,
+  registerFormHtml,
 };

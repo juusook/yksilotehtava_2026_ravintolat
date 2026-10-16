@@ -4,19 +4,76 @@ import {
   restaurantModal,
   restaurantRow,
   weeklyMenuTable,
+  authorizationModal,
+  loginFormHtml,
+  registerFormHtml,
 } from './components';
 import {fetchData} from './functions';
 import {Menu} from './types/Menu';
 import {Restaurant} from './types/Restaurant';
 import {apiUrl, positionOptions} from './variables';
+import {login, register, getUserData} from './authorization';
+import type {User} from './interfaces/Users';
+
+
 
 const modal = document.querySelector('dialog');
 if (!modal) {
   throw new Error('Modal not found');
 }
 
+const loginBtn = document.querySelector('#login-btn') as HTMLButtonElement | null;
+
 // Muuttuha auki olevalle ravintolle
+let currentUser: User | null = null;
 let currentRestaurant: Restaurant | null = null;
+
+// Kirjautuminen ja rekisteröityminen
+
+const updateAuthButton = (user: User | null) => {
+  if (!loginBtn) return;
+  if (user) {
+    loginBtn.textContent = `Kirjaudu ulos (${user.username})`;
+  } else {
+    loginBtn.textContent = 'Kirjaudu';
+  }
+};
+
+// LocalStrorage tarkistus
+const checkToken = async () => {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+
+  try {
+    currentUser = await getUserData(token);
+    updateAuthButton(currentUser);
+  } catch (error) {
+    console.warn('Token ei ole voimassa:', error);
+    localStorage.removeItem('token');
+    currentUser = null;
+    updateAuthButton(null);
+  }
+};
+
+checkToken();
+
+// Kirjaudu ja kirjaudu ulos -kuuntelija
+if (loginBtn) {
+  loginBtn.addEventListener('click', () => {
+    if (currentUser) {
+      // Kirjaudutaan ulos
+      localStorage.removeItem('token');
+      currentUser = null;
+      updateAuthButton(null);
+      alert('Olet kirjautunut ulos.');
+    } else {
+      // Avataan kirjautumis- ja rekisteröitymismodaali
+      modal.innerHTML = authorizationModal('login');
+      modal.showModal();
+    }
+  });
+}
+
 
 // Tapahtumakuuntelija modaalin napeille (sulkeminen/välilehdet)
 modal.addEventListener('click', async (event) => {
