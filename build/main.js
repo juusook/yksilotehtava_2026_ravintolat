@@ -86,9 +86,11 @@ const restaurantModal = (restaurant, menuHtml, activeTab = 'daily') => {
       </div>
     </div>
 
-    <div class="menu-tabs">
-      <button id="tab-daily" class="tab-btn ${activeTab === 'daily' ? 'active' : ''}">Päivän lista</button>
-      <button id="tab-weekly" class="tab-btn ${activeTab === 'weekly' ? 'active' : ''}">Viikon lista</button>
+    <div class="modal-nav-row">
+      <div class="menu-tabs">
+        <button id="tab-daily" class="tab-btn ${activeTab === 'daily' ? 'active' : ''}">Päivän lista</button>
+        <button id="tab-weekly" class="tab-btn ${activeTab === 'weekly' ? 'active' : ''}">Viikon lista</button>
+      </div>
       <button id="add-favorite-btn">Lisää suosikiksi</button>
     </div>
 

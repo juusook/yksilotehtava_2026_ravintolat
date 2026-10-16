@@ -381,19 +381,40 @@ button:hover {
   color: var(--ivory);
 }
 
+.modal-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.modal-header h3 {
+  margin: 0;
+}
+
+.modal-nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
 #add-favorite-btn {
-  background-color: var(--clay);
+  margin-left: auto;
+  background-color: var(--beige);
   color: white;
-  border: none;
-  padding: 0.5rem 0.75rem;
-  border-radius: var(--border-radius-large);
-  font-size: 0.75rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: var(--border-radius-medium);
+  font-size: 1rem;
   transition: background-color 0.2s ease-in, transform 0.2s ease-in;
+  margin-left: var(--medium-gap);
+  font-style: italic;
 }
 
 #add-favorite-btn:hover {
   background-color: var(--orange);
   transform: translateY(-1px);
+  color: white;
 }
 
 .menu-tabs {
@@ -590,6 +611,14 @@ button:hover {
   .diets {
     display: none;
   }
+
+  #napit button{
+    gap: 0.1rem;
+    font-size: 0.7rem;
+    padding: 0.4rem 0.3rem;
+    border-radius: var(--border-radius-medium);
+  }
+
 }
 
 @media (max-width: 600px) {
