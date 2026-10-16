@@ -22,7 +22,7 @@
   background: transparent;
   color: var(--shade);
   padding: 0.6rem 1.5rem;
-  border-radius: 999px;
+  border-radius: var(--border-radius-large);
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
@@ -84,23 +84,45 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-.auth-buttons {
+.auth-form .auth-buttons {
   display: flex;
+  align-items: center;
   justify-content: center;
   gap: 1rem;
   margin-top: 1rem;
 }
 
-auth-buttons button {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: var(--border-radius-medium, 12px);
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0;
 }
 
-auth-buttins button:hover {
-  background-color: var(--tile-orange);
+.auth-buttons button {
+  display: inline-flex;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--border-radius-medium);
+  font-size: 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in, box-shadow 0.2s ease-in, transform 0.2s ease-in;
+}
+
+.auth-buttons button:hover {
+  background-color: var(--orange);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .auth-buttons button {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.65rem;
+  }
+
+  auth-buttons {
+    gap: 0.35rem;
+  }
 }
