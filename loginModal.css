@@ -12,7 +12,7 @@
   background-color: var(--lightcyan);
   padding: 4px;
   border-radius: 999px;
-  gap: 4px;
+  gap: var(--medium-gap);
   margin-bottom: 1.5rem;
   border: 1px solid rgba(79, 144, 161, 0.2);
 }
@@ -96,7 +96,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: var(--medium-gap);
   margin-top: 0;
 }
 

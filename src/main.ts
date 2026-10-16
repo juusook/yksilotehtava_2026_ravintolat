@@ -25,20 +25,30 @@ if (!modal) {
 // Muuttuha auki olevalle ravintolle
 let currentUser: User | null = null;
 let currentRestaurant: Restaurant | null = null;
+let allRestaurants: Restaurant[] = [];
 
 // Kirjautuminen ja rekisteröityminen
 const loginBtn = document.querySelector('#login-btn') as HTMLButtonElement | null;
+const registerBtn = document.querySelector('#register-btn') as HTMLButtonElement | null;
+
 
 const updateAuthButton = (user: User | null) => {
-  if (!loginBtn) return;
-  if (user) {
-    loginBtn.textContent = `Kirjaudu ulos (${user.username})`;
-  } else {
-    loginBtn.textContent = 'Kirjaudu';
+  if (loginBtn) {
+    if (user) {
+      loginBtn.textContent = `Kirjaudu ulos (${user.username})`;
+    } else {
+      loginBtn.textContent = 'Kirjaudu';
+    }
+  }
+
+  if (registerBtn) {
+    if (user) {
+      registerBtn.style.display = 'none';
+    } else {
+      registerBtn.style.display = '';
+    }
   }
 };
-
-const registerBtn = document.querySelector('#register-btn') as HTMLButtonElement | null;
 
 if (registerBtn) {
   registerBtn.addEventListener('click', () => {
@@ -117,7 +127,7 @@ modal.addEventListener('click', async (event) => {
   const tabDaily = modal.querySelector('#tab-daily');
   const tabWeekly = modal.querySelector('#tab-weekly');
 
-
+  // Viikon ruokalistan näyttäminen
   if (target.id === 'tab-weekly') {
     try {
       if (menuContent) {
@@ -142,7 +152,7 @@ modal.addEventListener('click', async (event) => {
       }
     }
   }
-
+  // Päivän ruokalistan näyttäminen
   if (target.id === 'tab-daily') {
     try {
       if (menuContent) {
@@ -164,6 +174,44 @@ modal.addEventListener('click', async (event) => {
         menuContent.innerHTML = '<p>Päivän ruokalistaa ei saatu haettua.</p>';
       }
     }
+  }
+
+  //Suosikin lisääminen
+  if (target.id === 'add-favorite-btn') {
+    if (!currentUser) {
+      alert('Kirjaudu sisään tallentaaksesi suosikkiravintolan!');
+      return;
+    }
+
+    if (!currentRestaurant) return;
+
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    try {
+      const response = await fetch(apiUrl + '/users', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          favouriteRestaurant: currentRestaurant._id,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(`${currentRestaurant.name} tallennettu suosikiksi!`);
+        currentUser.favouriteRestaurant = currentRestaurant._id;
+      } else {
+        alert('Suosikin tallennus epäonnistui: ' + result.message);
+      }
+    } catch (error) {
+      console.error('Virhe suosikkia tallennettaessa:', error);
+    }
+    return;
   }
 });
 
@@ -271,6 +319,8 @@ const success = async (pos: GeolocationPosition) => {
     const crd = pos.coords;
     const restaurants = await fetchData<Restaurant[]>(apiUrl + '/restaurants');
 
+    allRestaurants = restaurants;
+
     restaurants.sort((a, b) => {
       const x1 = crd.latitude;
       const y1 = crd.longitude;
@@ -289,6 +339,7 @@ const success = async (pos: GeolocationPosition) => {
     const sodexoBtn = document.querySelector('#sodexo');
     const compassBtn = document.querySelector('#compass');
     const resetBtn = document.querySelector('#reset');
+    const favoriteBtn = document.querySelector('#filter-favorite-btn');
 
     if (!sodexoBtn) {
       throw new Error('Sodexo button not found');
@@ -311,6 +362,27 @@ const success = async (pos: GeolocationPosition) => {
       );
       createTable(compassRestaurants);
     });
+
+    if (favoriteBtn) {
+      favoriteBtn.addEventListener('click', () => {
+        if (!currentUser) {
+          modal.innerHTML = authorizationModal('login');
+          modal.showModal();
+          return;
+        }
+
+        const favRestaurant = allRestaurants.filter(
+          (r) => r._id === currentUser?.favouriteRestaurant
+        );
+
+        if (favRestaurant.length === 0) {
+          alert('Suosikkiravintolaasi ei löytynyt listalta.');
+          return;
+        }
+
+        createTable(favRestaurant);
+      });
+    }
 
     if (!resetBtn) {
       throw new Error('Reset button not found');

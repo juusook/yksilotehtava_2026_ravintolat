@@ -110,6 +110,7 @@ const restaurantModal = (
     <div class="menu-tabs">
       <button id="tab-daily" class="tab-btn ${activeTab === 'daily' ? 'active' : ''}">Päivän lista</button>
       <button id="tab-weekly" class="tab-btn ${activeTab === 'weekly' ? 'active' : ''}">Viikon lista</button>
+      <button id="add-favorite-btn">Lisää suosikiksi</button>
     </div>
 
     <div id="menu-content">
