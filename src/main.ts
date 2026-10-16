@@ -22,13 +22,12 @@ if (!modal) {
   throw new Error('Modal not found');
 }
 
-const loginBtn = document.querySelector('#login-btn') as HTMLButtonElement | null;
-
 // Muuttuha auki olevalle ravintolle
 let currentUser: User | null = null;
 let currentRestaurant: Restaurant | null = null;
 
 // Kirjautuminen ja rekisteröityminen
+const loginBtn = document.querySelector('#login-btn') as HTMLButtonElement | null;
 
 const updateAuthButton = (user: User | null) => {
   if (!loginBtn) return;
@@ -38,6 +37,17 @@ const updateAuthButton = (user: User | null) => {
     loginBtn.textContent = 'Kirjaudu';
   }
 };
+
+const registerBtn = document.querySelector('#register-btn') as HTMLButtonElement | null;
+
+if (registerBtn) {
+  registerBtn.addEventListener('click', () => {
+    if (!currentUser) {
+      modal.innerHTML = authorizationModal('register'); // Avataan suoraan rekisteröitymisnäkymä
+      modal.showModal();
+    }
+  });
+}
 
 // LocalStrorage tarkistus
 const checkToken = async () => {
@@ -79,8 +89,25 @@ if (loginBtn) {
 modal.addEventListener('click', async (event) => {
   const target = event.target as HTMLElement;
 
+  // Modaalin sulkeminen
   if (target.classList.contains('close-btn')) {
     modal.close();
+    return;
+  }
+
+  if (target.id === 'auth-tab-login') {
+    const container = modal.querySelector('#auth-form-container');
+    if (container) container.innerHTML = loginFormHtml();
+    modal.querySelector('#auth-tab-login')?.classList.add('active');
+    modal.querySelector('#auth-tab-register')?.classList.remove('active');
+    return;
+  }
+
+  if (target.id === 'auth-tab-register') {
+    const container = modal.querySelector('#auth-form-container');
+    if (container) container.innerHTML = registerFormHtml();
+    modal.querySelector('#auth-tab-register')?.classList.add('active');
+    modal.querySelector('#auth-tab-login')?.classList.remove('active');
     return;
   }
 
@@ -140,6 +167,57 @@ modal.addEventListener('click', async (event) => {
   }
 });
 
+modal.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const target = event.target as HTMLFormElement;
+  const errorText = modal.querySelector('#auth-error');
+
+  if (target.id === 'login-form') {
+    const usernameInput = target.querySelector('#username') as HTMLInputElement;
+    const passwordInput = target.querySelector('#password') as HTMLInputElement;
+
+    try {
+      const loginResult = await login(usernameInput.value, passwordInput.value);
+      localStorage.setItem('token', loginResult.token);
+      currentUser = loginResult.data;
+      updateAuthButton(currentUser);
+      modal.close();
+      alert(`Tervetuloa takaisin, ${currentUser.username}!`);
+    } catch (err) {
+      if (errorText) {
+        errorText.textContent = 'Kirjautuminen epäonnistui. Tarkista tunnukset.';
+      }
+    }
+  }
+
+  if (target.id === 'register-form') {
+    const usernameInput = target.querySelector('#reg-username') as HTMLInputElement;
+    const emailInput = target.querySelector('#reg-email') as HTMLInputElement;
+    const passwordInput = target.querySelector('#reg-password') as HTMLInputElement;
+
+    try {
+      await register({
+        username: usernameInput.value,
+        email: emailInput.value,
+        password: passwordInput.value,
+      });
+
+      // Automaattinen kirjautuminen rekisteröitymisen jälkeen
+      const loginResult = await login(usernameInput.value, passwordInput.value);
+      localStorage.setItem('token', loginResult.token);
+      currentUser = loginResult.data;
+      updateAuthButton(currentUser);
+      modal.close();
+      alert('Rekisteröityminen onnistui! Olet nyt kirjautunut sisään.');
+    } catch (err) {
+      if (errorText) {
+        errorText.textContent = 'Rekisteröityminen epäonnistui.';
+      }
+    }
+  }
+});
+
+// Geolocation ja ravintolalistaus
 const calculateDistance = (x1: number, y1: number, x2: number, y2: number) =>
   Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 

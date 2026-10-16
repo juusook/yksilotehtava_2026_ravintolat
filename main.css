@@ -112,21 +112,6 @@ hero-section .hero-content {
   text-align: center;
 }
 
-#login-btn {
-  background-color: var(--orange);
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-#login-btn:hover {
-  background-color: var(--tile-orange);
-  color: white;
-}
-
 #palvelut {
   width: 100%;
   background: linear-gradient(to bottom, var(--light-yellow), var(--ivory));
