@@ -101,7 +101,7 @@ a:hover {
   width: 100%;
   min-height: 350px;
   background-color: #1a252f;
-  background-image: linear-gradient(135deg, rgba(26, 37, 47, 0.5)), url('images/pasta.webp');
+  background-image: linear-gradient(135deg, rgba(26, 37, 47, 0.15)), url('images/pasta.webp');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -116,6 +116,7 @@ a:hover {
   margin-bottom: 1rem;;
   border-radius: var(--border-radius-medium);
   padding: 0.5rem 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 hero-section .hero-content {

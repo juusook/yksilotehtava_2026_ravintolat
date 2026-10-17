@@ -35,20 +35,31 @@ const registerBtn = document.querySelector('#register-btn') as HTMLButtonElement
 const updateAuthButton = (user: User | null) => {
   if (loginBtn) {
     if (user) {
-      loginBtn.textContent = `Kirjaudu ulos (${user.username})`;
+      loginBtn.textContent = user.username;
     } else {
       loginBtn.textContent = 'Kirjaudu';
     }
   }
 
   if (registerBtn) {
-    if (user) {
-      registerBtn.style.display = 'none';
-    } else {
-      registerBtn.style.display = '';
-    }
+    registerBtn.style.display = user ? 'none' : '';
   }
 };
+
+// Kirjaudu / Omat tiedot -napin klikkaus
+if (loginBtn) {
+  loginBtn.addEventListener('click', () => {
+    if (currentUser) {
+      // Kirjautuneena avataan profiilimodaali
+      modal.innerHTML = authorizationModal('profile', currentUser);
+      modal.showModal();
+    } else {
+      // Muuten avataan kirjautumis-modaali
+      modal.innerHTML = authorizationModal('login');
+      modal.showModal();
+    }
+  });
+}
 
 if (registerBtn) {
   registerBtn.addEventListener('click', () => {

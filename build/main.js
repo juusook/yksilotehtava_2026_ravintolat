@@ -109,8 +109,37 @@ const errorModal = (message) => {
   `;
     return html;
 };
+const profileFormHtml = (user) => `
+  <form id="profile-form" class="auth-form">
+    <h3>Omat tiedot</h3>
+    <div class="form-group">
+      <label for="prof-username">Käyttäjätunnus</label>
+      <input type="text" id="prof-username" name="username" value="${user.username}" required />
+    </div>
+    <div class="form-group">
+      <label for="prof-email">Sähköposti</label>
+      <input type="email" id="prof-email" name="email" value="${user.email ?? ''}" required />
+    </div>
+    <p id="auth-error" class="error-text"></p>
+
+    <div class="auth-buttons" style="flex-direction: column; gap: 0.5rem; width: 100%;">
+      <button type="submit" class="submit-btn" style="width: 100%;">Tallenna muutokset</button>
+      <button type="button" id="logout-btn" style="background-color: var(--orange); width: 100%;">Kirjaudu ulos</button>
+    </div>
+  </form>
+`;
 // Kirjautumis- ja rekisteröitymismodaali
-const authorizationModal = (type = 'login') => {
+const authorizationModal = (type = 'login', user) => {
+    if (type === 'profile' && user) {
+        return `
+      <button class="close-btn">&times;</button>
+      <div class="auth-container">
+        <div id="auth-form-container">
+          ${profileFormHtml(user)}
+        </div>
+      </div>
+    `;
+    }
     return `
     <button class="close-btn">&times;</button>
     <div class="auth-container">
@@ -236,21 +265,31 @@ const registerBtn = document.querySelector('#register-btn');
 const updateAuthButton = (user) => {
     if (loginBtn) {
         if (user) {
-            loginBtn.textContent = `Kirjaudu ulos (${user.username})`;
+            loginBtn.textContent = user.username;
         }
         else {
             loginBtn.textContent = 'Kirjaudu';
         }
     }
     if (registerBtn) {
-        if (user) {
-            registerBtn.style.display = 'none';
-        }
-        else {
-            registerBtn.style.display = '';
-        }
+        registerBtn.style.display = user ? 'none' : '';
     }
 };
+// Kirjaudu / Omat tiedot -napin klikkaus
+if (loginBtn) {
+    loginBtn.addEventListener('click', () => {
+        if (currentUser) {
+            // Kirjautuneena avataan profiilimodaali
+            modal.innerHTML = authorizationModal('profile', currentUser);
+            modal.showModal();
+        }
+        else {
+            // Muuten avataan kirjautumis-modaali
+            modal.innerHTML = authorizationModal('login');
+            modal.showModal();
+        }
+    });
+}
 if (registerBtn) {
     registerBtn.addEventListener('click', () => {
         if (!currentUser) {

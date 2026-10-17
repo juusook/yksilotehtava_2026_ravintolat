@@ -1,3 +1,4 @@
+import { User } from './interfaces/Users';
 import {Restaurant} from './types/Restaurant';
 
 // Ravintolarivi taulukkoon
@@ -133,8 +134,39 @@ const errorModal = (message: string) => {
   return html;
 };
 
+const profileFormHtml = (user: User) => `
+  <form id="profile-form" class="auth-form">
+    <h3>Omat tiedot</h3>
+    <div class="form-group">
+      <label for="prof-username">Käyttäjätunnus</label>
+      <input type="text" id="prof-username" name="username" value="${user.username}" required />
+    </div>
+    <div class="form-group">
+      <label for="prof-email">Sähköposti</label>
+      <input type="email" id="prof-email" name="email" value="${user.email ?? ''}" required />
+    </div>
+    <p id="auth-error" class="error-text"></p>
+
+    <div class="auth-buttons" style="flex-direction: column; gap: 0.5rem; width: 100%;">
+      <button type="submit" class="submit-btn" style="width: 100%;">Tallenna muutokset</button>
+      <button type="button" id="logout-btn" style="background-color: var(--orange); width: 100%;">Kirjaudu ulos</button>
+    </div>
+  </form>
+`;
+
 // Kirjautumis- ja rekisteröitymismodaali
-const authorizationModal = (type: 'login' | 'register' = 'login') => {
+const authorizationModal = (type: 'login' | 'register' | 'profile' = 'login', user?: User | null) => {
+  if (type === 'profile' && user) {
+    return `
+      <button class="close-btn">&times;</button>
+      <div class="auth-container">
+        <div id="auth-form-container">
+          ${profileFormHtml(user)}
+        </div>
+      </div>
+    `;
+  }
+
   return `
     <button class="close-btn">&times;</button>
     <div class="auth-container">
@@ -215,4 +247,5 @@ export {
   authorizationModal,
   loginFormHtml,
   registerFormHtml,
+  profileFormHtml,
 };
