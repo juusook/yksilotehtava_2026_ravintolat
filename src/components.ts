@@ -171,15 +171,35 @@ const registerFormHtml = () => `
     <h3>Luo uusi tili</h3>
     <div class="form-group">
       <label for="reg-username">Käyttäjätunnus</label>
-      <input type="text" id="reg-username" name="username" required autocomplete="username" />
+      <input type="text"
+      id="reg-username"
+      name="username"
+      required
+      autocomplete="username"
+      minlength="3"
+      placeholder="esim. MattiMeikäläinen"
+      />
     </div>
+
     <div class="form-group">
       <label for="reg-email">Sähköposti</label>
-      <input type="email" id="reg-email" name="email" required autocomplete="email" />
+      <input type="email"
+      id="reg-email"
+      name="email"
+      required
+      placeholder="matti@esimerkki.fi"
+      />
     </div>
+
     <div class="form-group">
       <label for="reg-password">Salasana</label>
-      <input type="password" id="reg-password" name="password" required autocomplete="new-password" />
+      <input type="password"
+      id="reg-password"
+      name="password"
+      required
+      pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
+      title="Salasanan tulee sisältää vähintään 8 merkkiä, joista yksi iso kirjain, yksi pieni kirjain, yksi numero ja yksi erikoismerkki (@$!%*?&)."
+      />
     </div>
     <p id="auth-error" class="error-text"></p>
     <button type="submit" class="submit-btn">Rekisteröidy</button>

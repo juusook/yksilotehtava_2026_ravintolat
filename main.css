@@ -15,7 +15,11 @@ html {
     --light-tile-orange: #E3CFC1;
     --cyan: #4F90A1;
     --lightcyan: #EBF4F6;
+    --darkcyan: #008b8b;
+    --darkest-cyan: #1e4652;
     --shade: #4A413C;
+    --light-shade: #7A6E66;
+    --dark-shade: #333333;
     --light-yellow: rgba(227, 217, 191, 0.3);
 
     --border-radius-medium: 12px;
@@ -24,10 +28,10 @@ html {
 
     --medium-gap: 10px;
  }
-
+/* body ja fontit */
 body {
   background-color: var(--ivory);
-  font-family: helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
   display: flex;
@@ -35,6 +39,15 @@ body {
   align-items: center;
 }
 
+button, input {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, nav, .logo {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* nav sticky wrapper */
 .top-wrapper {
   width: 100%;
 }
@@ -44,6 +57,7 @@ header {
   top: 0;
   z-index: 500;
   width: 100%;
+/*   background: linear-gradient(to right, var(--cyan) 66% ,var(--darkcyan) 100%); */
   background-color: var(--cyan);
   color: white;
   padding: 1rem;
@@ -62,7 +76,7 @@ nav {
 }
 
 nav .logo {
-  font-family: Roboto, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1.5rem;
   font-weight: bold;
   font-style: italic;
@@ -118,7 +132,7 @@ hero-section .hero-content {
 
 #palvelut {
   width: 100%;
-  background: linear-gradient(to bottom, var(--light-yellow), var(--ivory));
+  background: linear-gradient(to bottom, var(--ivory) 0%, var(--lightcyan) 50% ,var(--cyan) 80%);
 /*   background-color: var(--light-yellow); */
   padding: 4rem 0;
   margin-bottom: 2rem;
@@ -229,7 +243,7 @@ table {
   background-color: white;
   width: 90%;
   max-width: 800px;
-  border: 3px solid var(--cyan);
+  border: 3px solid var(--darkest-cyan);
   box-shadow: -4px 4px 12px rgba(0, 0, 0, 0.08);
 }
 
@@ -238,7 +252,7 @@ thead th{
   padding: 0.9rem;
   top: -2px;
   z-index: 10;
-  background-color: var(--cyan);
+  background-color: var(--darkest-cyan);
   font-size: 1.1rem;
   color: white;
 }
@@ -286,15 +300,15 @@ td {
 dialog {
   position: fixed;
   padding: 1.5rem 2rem;
-  border: 3px solid var(--beige);
+  border: 2px solid var(--beige);
   border-radius: var(--border-radius-large);
   width: 100%;
   max-width: 800px;
-  height: 85vh;
+  height: 88vh;
   min-height: 50vh;
   max-height: 90vh;
   overflow-y: auto;
-  background-color: white;
+  background: linear-gradient(to top, var(--ivory)0%, white 100%);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
@@ -309,7 +323,7 @@ dialog table {
 }
 
 dialog th {
-  background-color: var(--cyan);
+  background-color: var(--darkest-cyan);
   color: white;
   padding: 0.5rem;
 }
@@ -435,6 +449,13 @@ button:hover {
   font-weight: bold;
 }
 
+.tab-btn.active {
+  background-color: var(--darkest-cyan);
+  color: #ffffff;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
 .badge {
   display: inline-block;
   padding: 0.2em 0.6em;
@@ -484,7 +505,7 @@ button:hover {
   padding: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: 2px solid var(--light-tile-orange);
-  background-color: var(--cyan);
+  background: linear-gradient(33deg ,var(--cyan) 50%, var(--darkest-cyan) 100%);
 }
 
 .modal-info-container h3 {
@@ -547,6 +568,7 @@ button:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Responsiivinen suunnittelu */
 @media (max-width: 750px) {
   .modal-info-container {
     padding: 0.5rem;
