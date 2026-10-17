@@ -284,7 +284,7 @@ if (loginBtn) {
             localStorage.removeItem('token');
             currentUser = null;
             updateAuthButton(null);
-            alert('Olet kirjautunut ulos.');
+            return;
         }
         else {
             // Avataan kirjautumis- ja rekisteröitymismodaali
@@ -411,7 +411,7 @@ modal.addEventListener('submit', async (event) => {
             currentUser = loginResult.data;
             updateAuthButton(currentUser);
             modal.close();
-            alert(`Tervetuloa takaisin, ${currentUser.username}!`);
+            return;
         }
         catch (err) {
             if (errorText) {
@@ -435,7 +435,7 @@ modal.addEventListener('submit', async (event) => {
             currentUser = loginResult.data;
             updateAuthButton(currentUser);
             modal.close();
-            alert('Rekisteröityminen onnistui! Olet nyt kirjautunut sisään.');
+            alert('Rekisteröityminen onnistui!');
         }
         catch (err) {
             if (errorText) {

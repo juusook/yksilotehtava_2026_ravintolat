@@ -99,9 +99,9 @@ a:hover {
 
 #hero-section{
   width: 100%;
-  min-height: 300px;
+  min-height: 350px;
   background-color: #1a252f;
-  background-image: linear-gradient(135deg, rgba(26, 37, 47, 0.5)), url('images/hero2.webp');
+  background-image: linear-gradient(135deg, rgba(26, 37, 47, 0.5)), url('images/pasta.webp');
   background-size: cover;
   background-position: center;
   display: flex;
