@@ -10,6 +10,32 @@
   border-radius: var(--border-radius-large);
 }
 
+.tab-button, .tab-btn {
+  font-family: inherit;
+  font-size: var(--btn-font-size-medium);
+  padding: var(--btn-padding-medium);
+  border-radius: var(--border-radius-medium);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+.login-btn, .register-btn {
+  font-family: inherit;
+  font-size: var(--btn-font-size-medium);
+  padding: var(--btn-padding-medium);
+  border-radius: var(--border-radius-medium);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+.tab-btn.active,
+.tab-button.active {
+  background-color: var(--darkest-cyan);
+  border-color: var(--darkest-cyan);
+}
+
 .auth-container .menu-tabs {
   display: inline-flex;
   background-color: white;
@@ -133,7 +159,7 @@
     padding: 0.35rem 0.65rem;
   }
 
-  auth-buttons {
+  .auth-buttons {
     gap: 0.35rem;
   }
 }

@@ -26,6 +26,11 @@ html {
     --border-radius-large: 18px;
     --margin-medium: 2rem;
 
+    --btn-font-size-medium: 0.9rem;
+    --btn-font-size-small: 0.85rem;
+    --btn-padding-medium: 0.6rem 1.2rem;
+    --btn-padding-small: 0.45rem 0.9rem;
+
     --medium-gap: 10px;
  }
 /* body ja fontit */
@@ -568,6 +573,24 @@ button:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.tab-button,
+.tab-btn {
+  font-family: inherit;
+  font-size: var(--btn-font-size-medium);
+  padding: var(--btn-font-size-medium);
+  border-radius: var(--border-radius-medium);
+  background-color: var(--tile-orange);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.tab-btn.active,
+.tab-button.active {
+  background-color: var(--darkest-cyan);
+  color: white;
+}
+
 /* Responsiivinen suunnittelu */
 @media (max-width: 750px) {
   .modal-info-container {
@@ -635,10 +658,13 @@ button:hover {
   }
 
   #napit button{
+    font-family: inherit;
+    font-size: var(--btn-font-size-medium);
+    padding: var(--btn-padding-medium);
     gap: 0.1rem;
     font-size: 0.7rem;
-    padding: 0.4rem 0.3rem;
     border-radius: var(--border-radius-medium);
+    cursor: pointer;
   }
 
 }
