@@ -151,7 +151,7 @@ const registerFormHtml = () => `
       required
       autocomplete="username"
       minlength="3"
-      placeholder="esim. MattiMeikäläinen"
+      placeholder="esim. PaavoPesusieni"
       />
     </div>
 
@@ -161,7 +161,7 @@ const registerFormHtml = () => `
       id="reg-email"
       name="email"
       required
-      placeholder="matti@esimerkki.fi"
+      placeholder="paavopesu@sieni.fi"
       />
     </div>
 

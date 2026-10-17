@@ -162,4 +162,9 @@
   .auth-buttons {
     gap: 0.35rem;
   }
+
+  .tab-button, .tab-btn {
+    font-size: var(--btn-font-size-small);
+    padding: var(--btn-padding-small);
+  }
 }

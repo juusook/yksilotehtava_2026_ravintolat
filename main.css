@@ -15,8 +15,9 @@ html {
     --light-tile-orange: #E3CFC1;
     --cyan: #4F90A1;
     --lightcyan: #EBF4F6;
-    --darkcyan: #008b8b;
+    --darkcyan: #356370;
     --darkest-cyan: #1e4652;
+    --mint-green: #38B2AC;
     --shade: #4A413C;
     --light-shade: #7A6E66;
     --dark-shade: #333333;
@@ -28,10 +29,10 @@ html {
 
     --btn-font-size-medium: 0.9rem;
     --btn-font-size-small: 0.85rem;
-    --btn-padding-medium: 0.6rem 1.2rem;
-    --btn-padding-small: 0.45rem 0.9rem;
+    --btn-padding-medium: 0.6rem 1rem;
+    --btn-padding-small: 0.2rem 0.5rem;
 
-    --medium-gap: 10px;
+    --medium-gap: 8px;
  }
 /* body ja fontit */
 body {
@@ -62,8 +63,7 @@ header {
   top: 0;
   z-index: 500;
   width: 100%;
-/*   background: linear-gradient(to right, var(--cyan) 66% ,var(--darkcyan) 100%); */
-  background-color: var(--cyan);
+  background: linear-gradient(135deg, var(--cyan) 50%, var(--mint-green) 100%);
   color: white;
   padding: 1rem;
   display: flex;
@@ -131,14 +131,14 @@ hero-section .hero-content {
 #info {
   width: 90%;
   max-width: 800px;
-  margin: 4rem auto;
+  margin: 3rem auto;
   text-align: center;
 }
 
 #palvelut {
   width: 100%;
-  background: linear-gradient(to bottom, var(--ivory) 0%, var(--lightcyan) 50% ,var(--cyan) 80%);
-/*   background-color: var(--light-yellow); */
+  background: linear-gradient(to bottom,
+  var(--ivory) 0%, var(--lightcyan) 33%, var(--cyan) 100%);
   padding: 4rem 0;
   margin-bottom: 2rem;
 }
@@ -445,7 +445,7 @@ button:hover {
 }
 
 .tab-button {
-  padding: 0.5rem 1rem;
+  padding: var(--btn-padding-small);
   border: 1px solid var(--shade);
   border-radius: var(--border-radius-medium);
   background-color: white;
@@ -510,7 +510,7 @@ button:hover {
   padding: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: 2px solid var(--light-tile-orange);
-  background: linear-gradient(33deg ,var(--cyan) 50%, var(--darkest-cyan) 100%);
+  background: linear-gradient(135deg, var(--darkcyan) 0%, var(--cyan) 50%, var(--mint-green) 100%);
 }
 
 .modal-info-container h3 {
@@ -577,7 +577,7 @@ button:hover {
 .tab-btn {
   font-family: inherit;
   font-size: var(--btn-font-size-medium);
-  padding: var(--btn-font-size-medium);
+  padding: var(--btn-font-size-small);
   border-radius: var(--border-radius-medium);
   background-color: var(--tile-orange);
   color: white;
@@ -616,7 +616,7 @@ button:hover {
     height: auto;
   }
 
-  .maop-container iframe {
+  .map-container iframe {
     width: 100%;
     height: 100%;
   }
@@ -657,16 +657,6 @@ button:hover {
     display: none;
   }
 
-  #napit button{
-    font-family: inherit;
-    font-size: var(--btn-font-size-medium);
-    padding: var(--btn-padding-medium);
-    gap: 0.1rem;
-    font-size: 0.7rem;
-    border-radius: var(--border-radius-medium);
-    cursor: pointer;
-  }
-
 }
 
 @media (max-width: 600px) {
@@ -677,6 +667,16 @@ button:hover {
 
   .card-content h3 {
     font-size: 1.3rem;
+  }
+
+  #napit button{
+    font-family: inherit;
+    font-size: var(--btn-font-size-small);
+    padding: var(--btn-padding-small);
+    gap: 0.05rem;
+    font-size: var(--btn-font-size-small);
+    border-radius: var(--border-radius-medium);
+    cursor: pointer;
   }
 
   table {
@@ -707,8 +707,8 @@ button:hover {
   }
 
   .tab-button, .menu-tabs button {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.7rem;
+    padding: 0.35rem 0.65rem;
+    font-size: var(--btn-font-size-small);
   }
 
   .badge.sodexo, .badge.compass {
@@ -716,7 +716,7 @@ button:hover {
   }
 
   .badge.nearest {
-    font-size: 0.7rem;
+    font-size: var(--btn-font-size-small);
     padding: 0.15em 0.4em;
     align-items: center;
   }
