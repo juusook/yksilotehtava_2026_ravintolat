@@ -10,7 +10,7 @@ html {
     --ivory: #EBEFEE;
     --beige: #CCB499;
     --clay: #C8906D;
-    --tile-orange: #BB6C43;
+    --tile-orange: #A8532B;
     --orange: #B84E27;
     --light-tile-orange: #E3CFC1;
     --cyan: #4F90A1;
@@ -101,7 +101,7 @@ a:hover {
   width: 100%;
   min-height: 350px;
   background-color: #1a252f;
-  background-image: linear-gradient(135deg, rgba(26, 37, 47, 0.15)), url('images/pasta.webp');
+  background-image: linear-gradient(135deg, rgba(26, 37, 47, 0.15), rgba(26, 37, 47, 0.15)), url('images/pasta.webp');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -198,7 +198,7 @@ hero-section .hero-content {
 .card-content h3 {
   margin: 0;
   font-size: 1.25rem;
-  color: var(--clay);
+  color: var(--tile-orange);
   font-weight: bold;
 }
 
@@ -381,7 +381,7 @@ button:hover {
 
 .close-btn {
   position: absolute;
-  top: 1 rem;
+  top: 1rem;
   right: 1.2rem;
   z-index: 1001;
   font-size: 1.5rem;
@@ -422,7 +422,7 @@ button:hover {
 #add-favorite-btn {
   margin-left: auto;
   background-color: var(--beige);
-  color: white;
+  color: var(--dark-shade);
   padding: 0.4rem 0.5rem;
   border-radius: var(--border-radius-medium);
   font-size: 1rem;
@@ -488,7 +488,7 @@ button:hover {
 
 /* Lähin ravintola */
 .badge.nearest {
-  background-color: var(--clay);
+  background-color: var(--darkest-cyan);
   color: white;
   padding: 0.2em 0.6em;
   border-radius: var(--border-radius-medium);
@@ -570,7 +570,7 @@ button:hover {
   padding: 0.5rem;
   border-radius: var(--border-radius-medium);
   gap: var(--medium-gap);
-  margin-bottom: 1rem auto;
+  margin-bottom: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -631,7 +631,7 @@ button:hover {
   }
 
   #hero-section {
-    background-image: linear-gradient(135deg, rgba(26, 37, 47, 0.3)), url('images/unicafe.png');
+    background-image: linear-gradient(135deg, rgba(26, 37, 47, 0.3), rgba(26, 37, 47, 0.3)), url('images/unicafe.png');
   }
 
   #hero-section h1 {
@@ -646,7 +646,7 @@ button:hover {
 
   #tab.daily, #tab.weekly {
     gap: 0.3rem;
-    padding: 0.3;
+    padding: 0.3rem;
   }
 
   .tab-button, .menu-tabs button {
@@ -704,7 +704,7 @@ button:hover {
 
   #tab.daily, #tab.weekly {
     gap: 0.3rem;
-    padding: 0.3;
+    padding: 0.3rem;
   }
 
   .tab-button, .menu-tabs button {
