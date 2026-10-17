@@ -15,30 +15,21 @@ import {apiUrl, positionOptions} from './variables';
 import {login, register, getUserData} from './authorization';
 import type {User} from './interfaces/Users';
 
-
-
 const modal = document.querySelector('dialog');
 if (!modal) {
   throw new Error('Modal not found');
 }
 
-// Muuttuha auki olevalle ravintolle
 let currentUser: User | null = null;
 let currentRestaurant: Restaurant | null = null;
 let allRestaurants: Restaurant[] = [];
 
-// Kirjautuminen ja rekisteröityminen
 const loginBtn = document.querySelector('#login-btn') as HTMLButtonElement | null;
 const registerBtn = document.querySelector('#register-btn') as HTMLButtonElement | null;
 
-
 const updateAuthButton = (user: User | null) => {
   if (loginBtn) {
-    if (user) {
-      loginBtn.textContent = user.username;
-    } else {
-      loginBtn.textContent = 'Kirjaudu';
-    }
+    loginBtn.textContent = user ? user.username : 'Kirjaudu';
   }
 
   if (registerBtn) {
@@ -46,15 +37,12 @@ const updateAuthButton = (user: User | null) => {
   }
 };
 
-// Kirjaudu / Omat tiedot -napin klikkaus
 if (loginBtn) {
   loginBtn.addEventListener('click', () => {
     if (currentUser) {
-      // Kirjautuneena avataan profiilimodaali
       modal.innerHTML = authorizationModal('profile', currentUser);
       modal.showModal();
     } else {
-      // Muuten avataan kirjautumis-modaali
       modal.innerHTML = authorizationModal('login');
       modal.showModal();
     }
@@ -64,13 +52,13 @@ if (loginBtn) {
 if (registerBtn) {
   registerBtn.addEventListener('click', () => {
     if (!currentUser) {
-      modal.innerHTML = authorizationModal('register'); // Avataan suoraan rekisteröitymisnäkymä
+      modal.innerHTML = authorizationModal('register');
       modal.showModal();
     }
   });
 }
 
-// LocalStrorage tarkistus
+// LocalStorage tarkistus
 const checkToken = async () => {
   const token = localStorage.getItem('token');
   if (!token) return;
@@ -88,30 +76,11 @@ const checkToken = async () => {
 
 checkToken();
 
-// Kirjaudu ja kirjaudu ulos -kuuntelija
-if (loginBtn) {
-  loginBtn.addEventListener('click', () => {
-    if (currentUser) {
-      // Kirjaudutaan ulos
-      localStorage.removeItem('token');
-      currentUser = null;
-      updateAuthButton(null);
-      return;
-    } else {
-      // Avataan kirjautumis- ja rekisteröitymismodaali
-      modal.innerHTML = authorizationModal('login');
-      modal.showModal();
-    }
-  });
-}
-
-
-// Tapahtumakuuntelija modaalin napeille (sulkeminen/välilehdet)
+// Tapahtumakuuntelija modaalin napeille
 modal.addEventListener('click', async (event) => {
   const target = event.target as HTMLElement;
 
-  // Modaalin sulkeminen
-  if (target.classList.contains('close-btn')) {
+  if (target.closest('.close-btn')) {
     modal.close();
     return;
   }
@@ -132,70 +101,51 @@ modal.addEventListener('click', async (event) => {
     return;
   }
 
+  if (target.id === 'logout-btn') {
+    localStorage.removeItem('token');
+    currentUser = null;
+    updateAuthButton(null);
+    modal.close();
+    return;
+  }
+
   if (!currentRestaurant) return;
 
   const menuContent = modal.querySelector('#menu-content');
   const tabDaily = modal.querySelector('#tab-daily');
   const tabWeekly = modal.querySelector('#tab-weekly');
 
-  // Viikon ruokalistan näyttäminen
   if (target.id === 'tab-weekly') {
     try {
-      if (menuContent) {
-        menuContent.innerHTML = '<p>Ladataan viikon ruokalistaa...</p>';
-      }
-
-      const weeklyData = await fetchData<any>(
-        apiUrl + `/restaurants/weekly/${currentRestaurant._id}/fi`
-      );
-
+      if (menuContent) menuContent.innerHTML = '<p>Ladataan viikon ruokalistaa...</p>';
+      const weeklyData = await fetchData<any>(apiUrl + `/restaurants/weekly/${currentRestaurant._id}/fi`);
       const days = weeklyData.days || (Array.isArray(weeklyData) ? weeklyData : []);
-
-      if (menuContent) {
-        menuContent.innerHTML = weeklyMenuTable(days);
-      }
-
+      if (menuContent) menuContent.innerHTML = weeklyMenuTable(days);
       tabDaily?.classList.remove('active');
       tabWeekly?.classList.add('active');
     } catch (error) {
-      if (menuContent) {
-        menuContent.innerHTML = '<p>Viikon ruokalistaa ei saatu haettua.</p>';
-      }
+      if (menuContent) menuContent.innerHTML = '<p>Viikon ruokalistaa ei saatu haettua.</p>';
     }
   }
-  // Päivän ruokalistan näyttäminen
+
   if (target.id === 'tab-daily') {
     try {
-      if (menuContent) {
-        menuContent.innerHTML = '<p>Ladataan päivän ruokalistaa...</p>';
-      }
-
-      const dailyData = await fetchData<Menu>(
-        apiUrl + `/restaurants/daily/${currentRestaurant._id}/fi`
-      );
-
-      if (menuContent) {
-        menuContent.innerHTML = dailyMenuTable(dailyData?.courses);
-      }
-
+      if (menuContent) menuContent.innerHTML = '<p>Ladataan päivän ruokalistaa...</p>';
+      const dailyData = await fetchData<Menu>(apiUrl + `/restaurants/daily/${currentRestaurant._id}/fi`);
+      if (menuContent) menuContent.innerHTML = dailyMenuTable(dailyData?.courses);
       tabWeekly?.classList.remove('active');
       tabDaily?.classList.add('active');
     } catch (error) {
-      if (menuContent) {
-        menuContent.innerHTML = '<p>Päivän ruokalistaa ei saatu haettua.</p>';
-      }
+      if (menuContent) menuContent.innerHTML = '<p>Päivän ruokalistaa ei saatu haettua.</p>';
     }
   }
 
-  //Suosikin lisääminen
   if (target.id === 'add-favorite-btn') {
     if (!currentUser) {
       modal.innerHTML = authorizationModal('login');
       return;
     }
-
     if (!currentRestaurant) return;
-
     const token = localStorage.getItem('token');
     if (!token) return;
 
@@ -206,13 +156,9 @@ modal.addEventListener('click', async (event) => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          favouriteRestaurant: currentRestaurant._id,
-        }),
+        body: JSON.stringify({ favouriteRestaurant: currentRestaurant._id }),
       });
-
       const result = await response.json();
-
       if (response.ok) {
         alert(`${currentRestaurant.name} tallennettu suosikiksi!`);
         currentUser.favouriteRestaurant = currentRestaurant._id;
@@ -222,10 +168,10 @@ modal.addEventListener('click', async (event) => {
     } catch (error) {
       console.error('Virhe suosikkia tallennettaessa:', error);
     }
-    return;
   }
 });
 
+// Lomakkeiden lähetys
 modal.addEventListener('submit', async (event) => {
   event.preventDefault();
   const target = event.target as HTMLFormElement;
@@ -241,11 +187,8 @@ modal.addEventListener('submit', async (event) => {
       currentUser = loginResult.data;
       updateAuthButton(currentUser);
       modal.close();
-      return;
     } catch (err) {
-      if (errorText) {
-        errorText.textContent = 'Kirjautuminen epäonnistui. Tarkista tunnukset.';
-      }
+      if (errorText) errorText.textContent = 'Kirjautuminen epäonnistui. Tarkista tunnukset.';
     }
   }
 
@@ -261,7 +204,6 @@ modal.addEventListener('submit', async (event) => {
         password: passwordInput.value,
       });
 
-      // Automaattinen kirjautuminen rekisteröitymisen jälkeen
       const loginResult = await login(usernameInput.value, passwordInput.value);
       localStorage.setItem('token', loginResult.token);
       currentUser = loginResult.data;
@@ -269,22 +211,52 @@ modal.addEventListener('submit', async (event) => {
       modal.close();
       alert('Rekisteröityminen onnistui!');
     } catch (err) {
-      if (errorText) {
-        errorText.textContent = 'Rekisteröityminen epäonnistui.';
+      if (errorText) errorText.textContent = 'Rekisteröityminen epäonnistui.';
+    }
+  }
+
+  if (target.id === 'profile-form') {
+    const usernameInput = target.querySelector('#prof-username') as HTMLInputElement;
+    const emailInput = target.querySelector('#prof-email') as HTMLInputElement;
+    const token = localStorage.getItem('token');
+
+    try {
+      const response = await fetch(apiUrl + '/users', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          username: usernameInput.value,
+          email: emailInput.value,
+        }),
+      });
+
+      if (response.ok) {
+        if (currentUser) {
+          currentUser.username = usernameInput.value;
+          currentUser.email = emailInput.value;
+        }
+        updateAuthButton(currentUser);
+        modal.close();
+        alert('Tiedot päivitetty onnistuneesti!');
+      } else {
+        if (errorText) errorText.textContent = 'Tietojen päivitys epäonnistui.';
       }
+    } catch (err) {
+      console.error('Virhe profiilia päivitettäessä:', err);
     }
   }
 });
 
-// Geolocation ja ravintolalistaus
+// Taulukot ja Geolocation
 const calculateDistance = (x1: number, y1: number, x2: number, y2: number) =>
   Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 
 const createTable = (restaurants: Restaurant[]) => {
   const tbody = document.querySelector('tbody');
-  if (!tbody) {
-    throw new Error('Table body not found');
-  }
+  if (!tbody) throw new Error('Table body not found');
 
   tbody.innerHTML = '';
 
@@ -296,22 +268,12 @@ const createTable = (restaurants: Restaurant[]) => {
     tr.addEventListener('click', async () => {
       try {
         currentRestaurant = restaurant;
-
-        const allHighs = document.querySelectorAll('.highlight');
-        allHighs.forEach((high) => {
-          high.classList.remove('highlight');
-        });
+        document.querySelectorAll('.highlight').forEach((high) => high.classList.remove('highlight'));
         tr.classList.add('highlight');
 
-        // Haetaan päivän ruokalista
-        const menu = await fetchData<Menu>(
-          apiUrl + `/restaurants/daily/${restaurant._id}/fi`
-        );
-
-        // Luodaan ruokalistan HTML ja asetetaan se modaaliin
+        const menu = await fetchData<Menu>(apiUrl + `/restaurants/daily/${restaurant._id}/fi`);
         const menuHtml = dailyMenuTable(menu?.courses);
         modal.innerHTML = restaurantModal(restaurant, menuHtml, 'daily');
-
         modal.showModal();
       } catch (error) {
         modal.innerHTML = errorModal((error as Error).message);
@@ -329,50 +291,32 @@ const success = async (pos: GeolocationPosition) => {
   try {
     const crd = pos.coords;
     const restaurants = await fetchData<Restaurant[]>(apiUrl + '/restaurants');
-
     allRestaurants = restaurants;
 
     restaurants.sort((a, b) => {
-      const x1 = crd.latitude;
-      const y1 = crd.longitude;
-      const x2a = a.location.coordinates[1];
-      const y2a = a.location.coordinates[0];
-      const distanceA = calculateDistance(x1, y1, x2a, y2a);
-      const x2b = b.location.coordinates[1];
-      const y2b = b.location.coordinates[0];
-      const distanceB = calculateDistance(x1, y1, x2b, y2b);
+      const distanceA = calculateDistance(crd.latitude, crd.longitude, a.location.coordinates[1], a.location.coordinates[0]);
+      const distanceB = calculateDistance(crd.latitude, crd.longitude, b.location.coordinates[1], b.location.coordinates[0]);
       return distanceA - distanceB;
     });
 
     createTable(restaurants);
 
-    // Suodatusnapit
     const sodexoBtn = document.querySelector('#sodexo');
     const compassBtn = document.querySelector('#compass');
     const resetBtn = document.querySelector('#reset');
     const favoriteBtn = document.querySelector('#filter-favorite-btn');
 
-    if (!sodexoBtn) {
-      throw new Error('Sodexo button not found');
+    if (sodexoBtn) {
+      sodexoBtn.addEventListener('click', () => {
+        createTable(restaurants.filter((r) => r.company === 'Sodexo'));
+      });
     }
 
-    sodexoBtn.addEventListener('click', () => {
-      const sodexoRestaurants = restaurants.filter(
-        (restaurant: Restaurant) => restaurant.company === 'Sodexo'
-      );
-      createTable(sodexoRestaurants);
-    });
-
-    if (!compassBtn) {
-      throw new Error('Compass button not found');
+    if (compassBtn) {
+      compassBtn.addEventListener('click', () => {
+        createTable(restaurants.filter((r) => r.company === 'Compass Group'));
+      });
     }
-
-    compassBtn.addEventListener('click', () => {
-      const compassRestaurants = restaurants.filter(
-        (restaurant: Restaurant) => restaurant.company === 'Compass Group'
-      );
-      createTable(compassRestaurants);
-    });
 
     if (favoriteBtn) {
       favoriteBtn.addEventListener('click', () => {
@@ -382,26 +326,18 @@ const success = async (pos: GeolocationPosition) => {
           return;
         }
 
-        const favRestaurant = allRestaurants.filter(
-          (r) => r._id === currentUser?.favouriteRestaurant
-        );
-
+        const favRestaurant = allRestaurants.filter((r) => r._id === currentUser?.favouriteRestaurant);
         if (favRestaurant.length === 0) {
           alert('Suosikkiravintolaasi ei löytynyt listalta.');
           return;
         }
-
         createTable(favRestaurant);
       });
     }
 
-    if (!resetBtn) {
-      throw new Error('Reset button not found');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => createTable(restaurants));
     }
-
-    resetBtn.addEventListener('click', () => {
-      createTable(restaurants);
-    });
   } catch (error) {
     modal.innerHTML = errorModal((error as Error).message);
     modal.showModal();

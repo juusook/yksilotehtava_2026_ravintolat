@@ -1,19 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4F90A1">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32">
+
+  <!-- Fontit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
   <title>Safkaa</title>
+
+  <!-- Skriptit -->
   <link href="main.css" rel="stylesheet">
   <link  href="loginModal.css" rel="stylesheet">
-  <script src="build/main.js" type="module" defer></script>
+  <script src="build/main.js" type="module"></script>
 </head>
 
 <body>
+<!-- Header wrapper -->
   <div class="top-wrapper">
     <header id="header">
     <nav>
@@ -31,10 +40,10 @@
   <section id="hero-section">
     <div class="hero-content">
       <h1>Opiskelijaravintolat</h1>
-  <!--     <p>Halpaa safkaa jo vuodesta 1979.</p> -->
     </div>
   </section>
 
+  <!-- Info -->
   <section id="info">
     <h2>Tietoa opiskelijaravintoloista</h2>
     <p>Tervetuloa Opiskelijaravintoloiden verkkosivustolle! Täältä löydät tietoa opiskelijaravintoloista,
@@ -46,8 +55,9 @@
   <section id="palvelut">
     <div class="container">
     <h2>Palvelumme</h2>
-    <div class="card-container">
 
+    <!-- Kortit -->
+    <div class="card-container">
       <div class="card">
         <img src="images/hy_ravintola.jpg" alt="Ravintola" class="card-img">
         <div class="card-content">
@@ -93,9 +103,9 @@
     <button id="reset">Näytä kaikki</button>
   </div>
 
-
+<!-- Ravintolataulukko -->
   <table>
-    <thead
+    <thead>
       <tr>
         <th>NIMI</th>
         <th>OSOITE</th>
